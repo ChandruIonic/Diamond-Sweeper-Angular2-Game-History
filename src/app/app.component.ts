@@ -139,10 +139,6 @@ regenerateOldData() {
         question.className = 'cell arrow disabled responsive'
         question.style["transform"] = "rotate(" + val.slope + "deg)";
      })
-     
-    // this.oldData.openedDiamond.map((item)=> {
-    //     let diamond = document.getElementById(item)
-    // })
 
     for(var id in this.oldData.openedDiamond) {
         this.winCount++;
