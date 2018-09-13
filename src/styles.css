@@ -1,0 +1,55 @@
+/* You can add global styles to this file, and also import other style files */
+
+table {
+    border-spacing: 3px;
+    border-collapse: inherit;
+}
+
+.responsive {
+  max-width: 100%;
+  height: auto;
+}
+
+.cell {
+  height: 50px;
+  width: 50px;
+  background-size: 50px 50px;
+}
+  .cell.diamond {
+    background-image: url(/assets/img/diamond.png);
+    background-repeat: no-repeat; 
+  }
+  .cell.arrow {
+    background-image: url(/assets/img/arrow.png);
+    background-repeat: no-repeat;
+  }
+  .cell.unknown {
+    background-image: url(/assets/img/question.png);
+    background-repeat: no-repeat;
+  }
+
+.disabled {
+  pointer-events: none;
+  cursor: not-allowed; 
+}
+
+#diamond_container {
+  margin: auto;
+  margin-top: 30px;
+}
+
+#diamond_container td {
+      box-shadow: none;
+      transform: none;
+      border: 1px solid black;
+}
+
+.cell:hover {
+  opacity: 0.5;
+  -moz-box-shadow:    inset 0 0 10px #000000;
+   -webkit-box-shadow: inset 0 0 10px #000000;
+   box-shadow:         inset 0 0 10px #000000;
+}
+ td:hover {
+  border: 1px solid skyblue;
+ }

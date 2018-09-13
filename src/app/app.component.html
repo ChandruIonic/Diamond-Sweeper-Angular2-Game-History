@@ -1,0 +1,96 @@
+<header class="container" id="container">
+  <center>
+    <h1>
+      Diamond Sweeper
+    </h1>
+    <div class="row">
+      <div class="col-xs-12" style="margin: 0 auto;" id="game">
+      </div>
+    </div>
+  </center>  
+</header>
+<section class="modal fade" id="winner" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">        
+        <h1 class="modal-title">
+          Congratulations, You won!!!
+        </h1>
+        <button class="close" data-dismiss="modal" type="button">
+          ×
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>
+          Your Score is :
+          <strong>
+              <span id="winScore">
+              </span>
+          </strong>
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-success" data-dismiss="modal" type="button" 
+        (click)="reStartGame()">
+          Start New Game
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="modal fade" id="AlertModel" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <header class="modal-header">        
+        <h1 class="modal-title">
+          Alert!!!!!
+        </h1>
+        <button class="close" data-dismiss="modal" type="button">
+          ×
+        </button>
+      </header>
+      <div class="modal-body">
+        <p>
+          Game is already over, please restart the game.          
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-info" data-dismiss="modal" type="button" 
+        (click)="reStartGame()">
+          Restart Game
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="modal fade" id="progressAlert" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <header class="modal-header">        
+        <h1 class="modal-title">
+          Alert!!!!!
+        </h1>
+        <button class="close" data-dismiss="modal" type="button">
+          ×
+        </button>
+      </header>
+      <div class="modal-body">
+        <p>Last game is pending, are you wishing to continue?          
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-danger" data-dismiss="modal" type="button" 
+        (click)="continueLastGame()">
+          Continue Last Game
+        </button>
+        <button class="btn btn-danger" data-dismiss="modal" type="button" 
+        (click)="reStartGame()">
+          Restart Game
+        </button>
+      </div>
+    </div>
+  </div>
