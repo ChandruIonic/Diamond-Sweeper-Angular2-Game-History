@@ -11,21 +11,23 @@ table {
 }
 
 .cell {
-  height: 50px;
-  width: 50px;
-  background-size: 50px 50px;
+  height: 100%;
+  width: 100%;
 }
   .cell.diamond {
     background-image: url(/assets/img/diamond.png);
-    background-repeat: no-repeat; 
+    background-repeat: no-repeat;
+    background-size: 100% 
   }
   .cell.arrow {
     background-image: url(/assets/img/arrow.png);
     background-repeat: no-repeat;
+    background-size: 100% 
   }
   .cell.unknown {
     background-image: url(/assets/img/question.png);
     background-repeat: no-repeat;
+    background-size: 100% 
   }
 
 .disabled {
@@ -39,9 +41,14 @@ table {
 }
 
 #diamond_container td {
-      box-shadow: none;
-      transform: none;
-      border: 1px solid black;
+  box-shadow: none;
+  -webkit-transform: none;
+  transform: none;
+  border: 1px solid black;
+  display: inline-block;
+  margin: 2px;
+  width: 60px;
+  height: 60px;
 }
 
 .cell:hover {
@@ -53,3 +60,26 @@ table {
  td:hover {
   border: 1px solid skyblue;
  }
+/* Responsive desings starts */
+
+@media only screen and (max-width: 600px) {
+  #diamond_container td {
+    height: 30px;
+    width: 30px;
+  }
+}
+
+@media only screen and (min-width: 601px)
+and (max-width : 992px) { 
+  #diamond_container td {
+    height: 50px;
+    width: 50px;
+  }
+}
+@media only screen and (min-width: 993px)
+and (max-width : 1200px) { 
+  #diamond_container td {
+    height: 55px;
+    width: 55px;
+  }
+}
