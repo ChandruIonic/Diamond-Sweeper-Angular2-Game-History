@@ -1,6 +1,6 @@
 import { Component, OnInit, HostListener, Inject } from '@angular/core';
 
-import {LOCAL_STORAGE, WebStorageService} from 'angular-webstorage-service';
+//import {LOCAL_STORAGE, WebStorageService, StorageServiceModule} from 'angular-webstorage-service';
 
 @Component({
   selector: 'app-root',
@@ -8,7 +8,6 @@ import {LOCAL_STORAGE, WebStorageService} from 'angular-webstorage-service';
 })
 
 export class AppComponent implements OnInit {
-  dummyArray = [35 , 5, 15, 8]
   board_row: number = 8;
   board_col: number = 8;
   cellNum: number = 0;
@@ -26,13 +25,18 @@ export class AppComponent implements OnInit {
   alreadyOpenedDiamond:Object = {};
   totalDiamond:Object = {};  
   oldData:any;
+  remainData = {}
   
-  constructor(@Inject(LOCAL_STORAGE) private storage: WebStorageService) {
+  constructor() {
+    this.remainData["totalDiamondPlace"] = {};
+    this.remainData["remainDiamond"] = {};
+    this.remainData["openedQuestion"] = {};
+    this.remainData["openedDiamond"] = {};
 }
 
 
   ngOnInit() {
-    this.oldData = JSON.parse(this.storage.get("remainData"))
+    this.oldData = JSON.parse(localStorage.getItem("remainData"))
     console.log(this.oldData)
     console.log(this.oldData.openedQuestion)      
     if((Object.keys(this.oldData.openedDiamond).length < 8 && Object.keys(this.oldData.openedDiamond).length > 0) || this.oldData.openedQuestion.length > 0 ) {
@@ -85,7 +89,7 @@ randomGenerators() {
 }
 
 reStartGame() {
-    this.storage.remove("remainData");    
+    localStorage.removeItem("remainData");    
     this.randomGenerators();
     this.winCount = 0;
     $('div').css('transform', 'none').removeClass('arrow diamond disabled').addClass('unknown');
@@ -166,12 +170,12 @@ hint(clicked_id) {
 }
 
 @HostListener('window:beforeunload') beforeunloadHandler() {
-    let remainData = {}
-    remainData["totalDiamondPlace"] = this.totalDiamond
-    remainData["remainDiamond"] = this.diamondSet;
-    remainData["openedQuestion"] = this.alreadyOpenedArrow;
-    remainData["openedDiamond"] = this.openedDiamondSet;
-    this.storage.set("remainData", JSON.stringify(remainData));
+    
+    this.remainData["totalDiamondPlace"] = this.totalDiamond
+    this.remainData["remainDiamond"] = this.diamondSet;
+    this.remainData["openedQuestion"] = this.alreadyOpenedArrow;
+    this.remainData["openedDiamond"] = this.openedDiamondSet;
+    localStorage.setItem("remainData", JSON.stringify(this.remainData));
    }
 
 }
