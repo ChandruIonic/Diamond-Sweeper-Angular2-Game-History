@@ -28,10 +28,6 @@ export class AppComponent implements OnInit {
   remainData = {}
   
   constructor() {
-    this.remainData["totalDiamondPlace"] = {};
-    this.remainData["remainDiamond"] = {};
-    this.remainData["openedQuestion"] = {};
-    this.remainData["openedDiamond"] = {};
 }
 
 
@@ -40,15 +36,12 @@ export class AppComponent implements OnInit {
     console.log(this.oldData)
     console.log(this.oldData.openedQuestion)      
     if((Object.keys(this.oldData.openedDiamond).length < 8 && Object.keys(this.oldData.openedDiamond).length > 0) || this.oldData.openedQuestion.length > 0 ) {
-        if(Object.keys(this.oldData.openedDiamond).length < 8) {
             $('#game').empty();
             this.initializeBoard();
+            this.diamondSet = this.oldData.remainDiamond;
+            this.alreadyOpenedArrow = this.oldData.openedQuestion
+            this.openedDiamondSet = this.oldData.openedDiamond;
             $('#progressAlert').modal('show');
-        } else {
-            alert("last game is already over, Starting new game!!!");
-            this.initializeBoard();
-            this.randomGenerators();
-        } 
     } else {
         this.initializeBoard();
         this.randomGenerators();
@@ -89,7 +82,8 @@ randomGenerators() {
 }
 
 reStartGame() {
-    localStorage.removeItem("remainData");    
+    this.alreadyOpenedArrow = []
+    this.openedDiamondSet = {}; 
     this.randomGenerators();
     this.winCount = 0;
     $('div').css('transform', 'none').removeClass('arrow diamond disabled').addClass('unknown');
@@ -128,10 +122,7 @@ clickHandler = (e) => {
         }
 }
 
-continueLastGame() {
-        this.diamondSet = this.oldData.remainDiamond;
-        this.alreadyOpenedArrow = this.oldData.openedQuestion
-        this.openedDiamondSet = this.oldData.openedDiamond;
+continueLastGame() {        
         this.regenerateOldData()
 }
 
@@ -169,8 +160,7 @@ hint(clicked_id) {
            (this.cellCordinates[nearestDiamondId].y - this.cellCordinates[clicked_id].y))) * 180 / Math.PI;
 }
 
-@HostListener('window:beforeunload') beforeunloadHandler() {
-    
+@HostListener('window:beforeunload') beforeunloadHandler() {    
     this.remainData["totalDiamondPlace"] = this.totalDiamond
     this.remainData["remainDiamond"] = this.diamondSet;
     this.remainData["openedQuestion"] = this.alreadyOpenedArrow;
