@@ -35,14 +35,18 @@ export class AppComponent implements OnInit {
     this.oldData = JSON.parse(localStorage.getItem("remainData"))
     console.log(this.oldData)
     console.log(this.oldData.openedQuestion)      
-    if((Object.keys(this.oldData.openedDiamond).length >= 0 && Object.keys(this.oldData.openedDiamond).length < 8) && this.oldData.openedQuestion.length > 0 ) {
-            
+    if((Object.keys(this.oldData.openedDiamond).length > 0 && Object.keys(this.oldData.openedDiamond).length < 8) || this.oldData.openedQuestion.length > 0 ) {
+           if(Object.keys(this.oldData.openedDiamond).length < 8){
             $('#game').empty();
             this.initializeBoard();
             this.diamondSet = this.oldData.remainDiamond;
             this.alreadyOpenedArrow = this.oldData.openedQuestion
             this.openedDiamondSet = this.oldData.openedDiamond;
             $('#progressAlert').modal('show');
+           } else {
+            this.initializeBoard();
+            $('#AlertModel').modal('show'); 
+           }           
     } else {
         this.initializeBoard();
         this.randomGenerators();
